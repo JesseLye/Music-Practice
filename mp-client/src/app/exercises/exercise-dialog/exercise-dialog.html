@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{ data.displayRoute }} Exercise</h1>
+<div mat-dialog-content>
+    <form [formGroup]="submitExerciseForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="createUpdateExercise">
+            <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' class="mat-form-field-width-override">
+                <input type="text" id="ExerciseName" placeholder="Exercise Name" formControlName="exerciseName"
+                    matInput>
+                <mat-error *ngIf="submitExerciseForm.controls['exerciseName'].errors?.required">
+                    Exercise Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex-container horizontal-end button-margin">
+            <button type="button" mat-flat-button (click)="onCancel()">Cancel</button>
+            <mat-spinner-button [options]="buttonOptions" (btnClick)="onSubmit()"></mat-spinner-button>
+            <!-- <button [disabled]="!submitExerciseForm.valid" mat-flat-button color='primary' type="submit">Submit</button> -->
+        </div>
+    </form>
+</div>

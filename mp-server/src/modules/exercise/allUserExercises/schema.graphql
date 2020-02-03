@@ -1,0 +1,15 @@
+type ExerciseWithSections {
+    id: ID
+    exerciseName: String
+    createdAt: Date
+    exerciseSections: [Section]
+}
+
+type UserExercises {
+    exercises: [ExerciseWithSections]
+    status: Status!
+}
+
+type Query {
+    allUserExercises: UserExercises!
+}

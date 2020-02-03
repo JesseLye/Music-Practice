@@ -1,0 +1,20 @@
+<mat-card-title style="font-weight: 300;">
+    Song List
+</mat-card-title>
+<mat-card-content class="song-component">
+    <mat-list>
+        <div *ngFor="let song of songsReceived; let i = index;" matRipple [matRippleCentered] class="song-container"
+            [ngClass]="{'border-bottom': i !== songsReceived.length - 1, 'song-selected': song.id === selectedSong}" (click)="onSelect(song.id)">
+            <mat-list-item>
+                <div class="song-name">{{ song.artistName }} ― {{ song.songName }}</div>
+                <div class="song-operations">
+                    <i class="material-icons pointer" (click)="onEdit(song.id)">edit</i>
+                    <i class="material-icons pointer" (click)="onDelete(song.id)">clear</i>
+                </div>
+            </mat-list-item>
+        </div>
+    </mat-list>
+</mat-card-content>
+<mat-card-actions align='end'>
+    <button mat-flat-button routerLink="add" color="primary">Add Song</button>
+</mat-card-actions>

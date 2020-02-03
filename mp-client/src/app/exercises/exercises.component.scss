@@ -1,0 +1,37 @@
+.position-exercise {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    width: 100%;
+}
+
+.exercise-flex {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    
+    @media (max-width: "600px") {
+        flex-direction: column;
+    }
+}
+
+.exercise-width {
+    width: 45%;
+    @media (max-width: "600px") {
+        width: 90%;
+    }
+}
+
+.margin-on-mobile {
+    @media (max-width: "600px") {
+        margin-bottom: 1rem;
+        margin-top: 6rem;
+    }
+}
+
+.margin-bottom-on-mobile {
+    @media (max-width: "600px") {
+        margin-bottom: 2rem;
+    }
+}

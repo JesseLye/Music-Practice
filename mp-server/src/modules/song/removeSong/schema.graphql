@@ -1,0 +1,3 @@
+type Mutation {
+    removeSong(id: ID!): Status!
+}

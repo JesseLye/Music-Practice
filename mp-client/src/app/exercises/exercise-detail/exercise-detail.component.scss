@@ -1,0 +1,33 @@
+.section-component {
+    min-height: 50vh;
+    max-height: 50vh;
+    @media (max-width: "600px") {
+        min-height: 25vh;
+        max-height: 25vh;
+    }
+    overflow-y: auto;
+}
+.section-details {
+    flex-basis: 80%;
+
+    @media (max-width: "1333px") {
+        flex-basis: 75%;
+    }
+
+    @media (max-width: "875px") {
+        flex-basis: 70%;
+    }
+
+    @media (max-width: "356px") {
+        flex-basis: 65%;
+    }
+}
+.section-operations {
+    display: none;
+}
+.section-container:hover {
+    background-color: #F0F0F0;
+}
+.section-container:hover .section-operations {
+    display: block;
+}

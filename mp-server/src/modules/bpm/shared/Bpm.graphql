@@ -1,0 +1,6 @@
+type Bpm {
+    id: ID
+    bpm: Int
+    createdAt: Date
+    status: Status
+}

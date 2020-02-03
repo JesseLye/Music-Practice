@@ -1,0 +1,7 @@
+input RemoveBpmType {
+    bpmId: ID!
+}
+
+type Mutation {
+    removeBpm(bpms: [RemoveBpmType!]!, sectionId: ID!, isSong: Boolean!): Status!
+}

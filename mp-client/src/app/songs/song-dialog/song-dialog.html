@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>{{ data.displayRoute }} Song</h1>
+<div mat-dialog-content>
+    <form [formGroup]="submitSongForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="createUpdateSong">
+            <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' class="mat-form-field-width-override">
+                <input type="text" id="artistName" placeholder="Artist Name" formControlName="artistName" matInput>
+                <mat-error *ngIf="submitSongForm.controls['artistName'].errors?.required">
+                    Artist Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' class="mat-form-field-width-override">
+                <input type="text" id="songName" placeholder="Song Name" formControlName="songName" matInput>
+                <mat-error *ngIf="submitSongForm.controls['songName'].errors?.required">
+                    Song Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex-container horizontal-end button-margin">
+            <button type="button" mat-flat-button (click)="onCancel()">Cancel</button>
+            <mat-spinner-button [options]="buttonOptions" (btnClick)="onSubmit()"></mat-spinner-button>
+            <!-- <button [disabled]="!submitSongForm.valid" mat-flat-button color='primary' type="submit">Submit</button> -->
+        </div>
+    </form>
+</div>

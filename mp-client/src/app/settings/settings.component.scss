@@ -1,0 +1,34 @@
+.settings-component {
+    // min-height: 50vh;
+    max-height: 50vh;
+}
+
+.settings-card-height {
+    height: 65vh;
+}
+
+.settings-card-min-width {
+    min-width: 45vw;
+}
+
+.settings-input-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-margin-top {
+    margin-top: 1.5rem;
+}
+
+.settings-input-margin-bottom {
+    margin-bottom: 1.25em;
+}
+
+.settings-input-flex-basis {
+    flex-basis: 75%;
+}
+
+.settings-input-email-margin-bottom {
+    margin-bottom: 1rem;
+}

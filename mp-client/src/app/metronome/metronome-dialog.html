@@ -1,0 +1,9 @@
+<h1 mat-dialog-title style="margin-top: 0; margin-bottom: 0;">Log BPM</h1>
+<div mat-dialog-content style="margin-bottom: 0.66rem;">
+  <p>Log {{data.bpm}}bpm?</p>
+</div>
+<div class="flex-container horizontal-end button-margin">
+  <button mat-button (click)="onCancel()" style="margin-right: 0.5rem;">Cancel</button>
+  <mat-spinner-button [options]="buttonOptions" (btnClick)="onSubmit()"></mat-spinner-button>
+  <!-- <button mat-flat-button color='primary' (click)="onSubmit()" cdkFocusInitial>Submit</button> -->
+</div>

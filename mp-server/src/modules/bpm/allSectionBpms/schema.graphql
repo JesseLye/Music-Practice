@@ -1,0 +1,8 @@
+type SectionBpms {
+    bpms: [Bpm]
+    status: Status!
+}
+
+type Query {
+    allSectionBpms(SectionId: ID!, isSong: Boolean!): SectionBpms!
+}

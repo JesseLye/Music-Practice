@@ -1,0 +1,25 @@
+<div *ngIf="loading; then loadingBlock; else songsBlock"></div>
+<ng-template #songsBlock>
+  <app-sidenav [menuTitle]="'Songs'">
+    <div class="title-banner">
+    </div>
+    <div class="position-song">
+      <div class="container">
+        <div class="song-flex">
+          <mat-card class="song-width margin-on-mobile">
+            <app-song-list [songsReceived]="songs"></app-song-list>
+          </mat-card>
+          <mat-card class="song-width margin-bottom-on-mobile"> 
+            <app-song-detail></app-song-detail>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </app-sidenav>
+  <router-outlet></router-outlet>
+</ng-template>
+<ng-template #loadingBlock>
+  <div class="center-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

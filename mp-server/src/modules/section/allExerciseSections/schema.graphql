@@ -1,0 +1,8 @@
+type ExerciseSections {
+    exerciseSection: [Section]
+    status: Status!
+}
+
+type Query {
+    allExerciseSections(ExerciseId: ID!): ExerciseSections!
+}

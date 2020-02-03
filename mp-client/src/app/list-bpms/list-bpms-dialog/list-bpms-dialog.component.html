@@ -1,0 +1,9 @@
+<h1 mat-dialog-title class="no-margin-bottom">Delete Bpms</h1>
+<div mat-dialog-content>
+    <p>Delete <strong>{{ bpmAmount }}</strong> bpms?</p>
+    <div class="flex-container horizontal-end button-margin">
+        <button mat-flat-button (click)="onCancel()">Cancel</button>
+        <mat-spinner-button [options]="buttonOptions" (btnClick)="onSubmit()"></mat-spinner-button>
+        <!-- <button mat-flat-button (click)="onSubmit()" color="warn">Delete</button> -->
+    </div>
+</div>

@@ -1,0 +1,4 @@
+type Status {
+    ok: Boolean!
+    errMessage: String
+}

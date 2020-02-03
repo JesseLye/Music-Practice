@@ -1,0 +1,7 @@
+<h4 class="font-light" style="margin-top: 0;">Practice Consistency: {{ displayMonthRange }}</h4>
+<div #barchart class="chart-height" id="bar-chart" (window:resize)="onResize()">
+</div>
+<div class="flex-container horizontal-space-between">
+    <button mat-flat-button (click)="selectDataPrevious()" color="primary" [disabled]="!previousData">Previous</button>
+    <button mat-flat-button (click)="selectDataNext()" color="primary" [disabled]="!nextData">Next</button>
+</div>

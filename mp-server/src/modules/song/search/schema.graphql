@@ -1,0 +1,13 @@
+
+type fullSongDetails {
+    id: ID
+    songName: String
+    artistName: String
+    createdAt: Date
+    songSections: [SectionsWithBpms]
+    status: Status!
+}
+
+type Query {
+    fullSongDetails(id: ID!): fullSongDetails
+}

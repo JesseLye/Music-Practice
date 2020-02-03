@@ -1,0 +1,9 @@
+type BasicUserDetails {
+  id: ID
+  email: String
+  status: Status!
+}
+
+type Mutation {
+    authUser(email: String!, password: String!, setNewSession: Boolean!): BasicUserDetails!
+}

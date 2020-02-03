@@ -1,0 +1,6 @@
+type Exercise {
+    id: ID
+    exerciseName: String
+    createdAt: Date
+    status: Status
+}

@@ -1,0 +1,3 @@
+type Mutation {
+    performResetPassword(newPassword1: String!, newPassword2: String!, key: String!): Status!
+}

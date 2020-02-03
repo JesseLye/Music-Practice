@@ -1,0 +1,5 @@
+type Mutation {
+    updateUser(updateEmail: String, confirmUpdateEmail: String, 
+    updatePassword: String, confirmUpdatePassword: String,
+    performPasswordUpdate: Boolean!): User!
+}

@@ -1,0 +1,11 @@
+type fullExerciseDetails {
+    id: ID
+    exerciseName: String
+    exerciseSections: [SectionsWithBpms]
+    createdAt: Date
+    status: Status!
+}
+
+type Query {
+    fullExerciseDetails(id: ID!): fullExerciseDetails
+}

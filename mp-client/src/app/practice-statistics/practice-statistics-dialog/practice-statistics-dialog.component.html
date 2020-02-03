@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Custom Date</h1>
+<div mat-dialog-content>
+    <form [formGroup]="dateForm" (ngSubmit)="onSubmit()">
+        <mat-form-field hideRequiredMarker class="mat-form-field-width-override">
+            <input matInput [matDatepicker]="startdate" [errorStateMatcher]="matcher" required placeholder="Start Date"
+                formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+            <mat-datepicker #startdate></mat-datepicker>
+            <mat-error *ngIf="dateForm.controls['startDate'].errors?.required">
+                Start Date is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker class="mat-form-field-width-override">
+            <input matInput [matDatepicker]="endDate" [errorStateMatcher]="matcher" required placeholder="End Date"
+                formControlName="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
+            <mat-error *ngIf="dateForm.controls['endDate'].errors?.required">
+                End Date is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="dateForm.controls['endDate'].errors?.dateError">
+                Start Date must not be greater than <strong>End Date</strong>
+            </mat-error>
+            <mat-error *ngIf="dateForm.controls['endDate'].errors?.dateLimitError">
+                End Date must exceed <strong>2 Days</strong> from Start Date
+            </mat-error>
+        </mat-form-field>
+        <div class="flex-container horizontal-end button-margin">
+            <button type="button" mat-flat-button (click)="onCancel()">Cancel</button>
+            <button mat-flat-button [disabled]="!dateForm.valid" color='primary' type="submit">Submit</button>
+        </div>
+    </form>
+</div>

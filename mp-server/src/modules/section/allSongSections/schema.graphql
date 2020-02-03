@@ -1,0 +1,8 @@
+type SongSections {
+    songSections: [Section]
+    status: Status!
+}
+
+type Query {
+    allSongSections(SongId: ID!): SongSections!
+}

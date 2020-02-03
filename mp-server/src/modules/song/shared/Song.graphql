@@ -1,0 +1,7 @@
+type Song {
+    id: ID
+    songName: String
+    artistName: String
+    createdAt: Date
+    status: Status!
+}

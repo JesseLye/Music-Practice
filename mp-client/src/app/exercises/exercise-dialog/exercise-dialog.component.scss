@@ -1,0 +1,14 @@
+.button-margin {
+    margin-top: 2rem;
+    & > button {
+        margin-right: 0.5rem;
+        &:nth-last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.section-divider-spacing {
+    margin-top: 10px;
+    padding-bottom: 10px;
+}

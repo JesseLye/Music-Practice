@@ -1,0 +1,13 @@
+input CreateSectionType {
+    sectionName: String!
+    targetBPM: Int!
+}
+
+type returnSections {
+    sections: [Section!]
+    status: Status!
+}
+
+type Mutation {
+    addSections(input: [CreateSectionType!]!, SongId: ID, ExerciseId: ID): returnSections!
+}

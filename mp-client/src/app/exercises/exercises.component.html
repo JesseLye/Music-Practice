@@ -1,0 +1,25 @@
+<div *ngIf="loading; then loadingBlock; else exercisesBlock"></div>
+<ng-template #exercisesBlock>
+  <app-sidenav [menuTitle]="'Exercises'">
+    <div class="title-banner">
+    </div>
+    <div class="position-exercise">
+      <div class="container">
+        <div class="exercise-flex">
+          <mat-card class="exercise-width margin-on-mobile">
+            <app-exercise-list [exercisesReceived]="exercises"></app-exercise-list>
+          </mat-card>
+          <mat-card class="exercise-width margin-bottom-on-mobile"> 
+            <app-exercise-detail></app-exercise-detail>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </app-sidenav>
+  <router-outlet></router-outlet>
+</ng-template>
+<ng-template #loadingBlock>
+  <div class="center-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

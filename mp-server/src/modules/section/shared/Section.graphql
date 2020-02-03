@@ -1,0 +1,19 @@
+type Section {
+    id: ID
+    sectionName: String
+    targetBPM: Int
+    SongId: ID
+    ExerciseId: ID
+    createdAt: Date
+    Status: Status
+}
+
+type SectionsWithBpms {
+    id: ID
+    sectionName: String
+    targetBPM: Int
+    SongId: ID
+    ExerciseId: ID
+    createdAt: Date
+    sectionBpms: [Bpm]
+}

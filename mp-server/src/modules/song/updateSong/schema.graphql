@@ -1,0 +1,3 @@
+type Mutation {
+    updateSong(id: ID!, songName: String, artistName: String): Status!
+}

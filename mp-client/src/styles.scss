@@ -1,0 +1,103 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; background-color: #F2F3FA; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.container {
+    overflow: hidden;
+    padding-left: 18px;
+    padding-right: 18px;
+    max-width: 1236px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.flex-container {
+    display: flex;
+}
+.flex-column {
+    flex-direction: column;
+}
+.horizontal-center {
+    justify-content: center;
+}
+.vertical-center {
+    align-items: center;
+}
+.horizontal-end {
+    justify-content: flex-end;
+}
+.horizontal-space-between {
+    justify-content: space-between;
+}
+.text-center {
+    text-align: center;
+}
+.font-light {
+    font-weight: 300;
+}
+.max-height {
+    height: 90vh;
+}
+.max-width {
+    width: 100%;
+}
+.margin-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+.pointer {
+    cursor: pointer;
+}
+.auth-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50vw;
+    &-container {
+        padding: 48px 40px 36px;
+    }
+    &-width {
+        flex-basis: 30rem;
+    }
+    &-padding {
+        padding: 2rem !important;
+    }
+}
+.mat-form-field-width-override {
+    width: 100% !important;
+}
+.mat-card-title-override {
+    font-weight: 300 !important;
+}
+.center-spinner {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+.title-banner {
+    position: absolute;
+    background-color: #5E72E4; 
+    height: 35vh; 
+    width: 100%;
+    z-index: -100;
+
+    @media(max-height: "400px") {
+        height: 50vh;
+    }
+
+    @media (max-width: "600px") {
+        height: 50vh;
+    }
+}
+.form-banner {
+    position: absolute;
+    background-color: #5E72E4; 
+    height: 50vh; 
+    width: 100vw;
+}
+.white-icon {
+    color: #fff;
+}
+.form-width {
+    width: 50%;
+}

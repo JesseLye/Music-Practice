@@ -1,0 +1,70 @@
+.play-button {
+    &-container {
+        text-align: center;
+    }
+
+    &-colour {
+        color: steelblue;
+        font-size: 6rem;
+    }
+}
+
+.title {
+    position: absolute;
+    top: 3%;
+    transform: translateY(-3%);
+    color: #fff;
+    font-weight: 300;
+}
+
+.metronome-container {
+    width: 40%;
+
+    @media (max-width: "1333px") {
+        width: 50%;
+    }
+
+    @media (max-width: "875px") {
+        width: 60%;
+    }
+
+    @media (max-width: "356px") {
+        width: 90%;
+    }
+}
+
+.metronome-height {
+    height: 56vh;
+}
+
+.bpm-container {
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.custom-slider-styles ::ng-deep {
+    .mat-slider-thumb {
+        background-color: steelblue;
+    }
+    .mat-slider-track-fill {
+        background-color: steelblue;
+    }
+}
+
+.button-margin {
+    margin-top: 2rem;
+    & > button {
+        margin-right: 0.5rem;
+        &:nth-last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+mat-slider {
+    width: 75%;
+}

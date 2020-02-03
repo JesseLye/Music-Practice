@@ -1,0 +1,42 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  flex: 1 0 auto;
+}
+
+.icon-margin-right {
+  margin-right: 0.6rem;
+}
+
+.mobile-width {
+  width: 15%;
+
+  @media (max-width: "973px") {
+    width: 30%;
+  }
+
+  @media (max-width: "479px") {
+    width: 60%;
+  }
+}

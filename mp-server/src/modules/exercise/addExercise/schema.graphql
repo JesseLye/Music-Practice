@@ -1,0 +1,3 @@
+type Mutation {
+    addExercise(exerciseName: String!): Exercise!
+}

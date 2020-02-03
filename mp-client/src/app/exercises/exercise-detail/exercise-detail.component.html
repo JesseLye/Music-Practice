@@ -1,0 +1,32 @@
+<mat-card-title style="font-weight: 300;">
+    Exercise Details
+</mat-card-title>
+<mat-card-content class="section-component">
+    <ng-template [ngIf]="selectedExercise" [ngIfElse]="noExerciseSelected">
+        <mat-list>
+            <h3 mat-subheader>Exercise Title</h3>
+            <mat-list-item>
+                <h4 mat-line>{{selectedExercise.exerciseName}}</h4>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+            <h3 mat-subheader>Exercise Sections</h3>
+            <div *ngFor="let section of selectedExercise.exerciseSections" class="section-container">
+                <mat-list-item>
+                    <div class="section-details">{{section.sectionName}}</div>
+                    <div class="section-operations">
+                        <i class="material-icons pointer" (click)="onPracticeSection(section.id)">timer</i>
+                        <i class="material-icons pointer" (click)="onEditSection(section.id)">edit</i>
+                        <i class="material-icons pointer" (click)="onDeleteSection(section.id)">clear</i>
+                    </div>
+                </mat-list-item>
+            </div>
+        </mat-list>
+    </ng-template>
+    <ng-template #noExerciseSelected>
+        <h2 style="font-weight: 300;">No exercise selected.</h2>
+    </ng-template>
+</mat-card-content>
+<mat-card-actions align='end'>
+    <button mat-flat-button (click)="onAddSection()" color="primary" [disabled]="!selectedExercise">Add Sections</button>
+    <button mat-button routerLink="dashboard" (click)="onViewStatistics()" [disabled]="!selectedExercise">View Statistics</button>
+</mat-card-actions>

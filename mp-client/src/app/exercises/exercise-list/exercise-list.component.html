@@ -1,0 +1,20 @@
+<mat-card-title style="font-weight: 300;">
+    Exercise List
+</mat-card-title>
+<mat-card-content class="exercise-component">
+    <mat-list>
+        <div *ngFor="let exercise of exercisesReceived; let i = index;" matRipple [matRippleCentered] class="exercise-container"
+            [ngClass]="{'border-bottom': i !== exercisesReceived.length - 1, 'exercise-selected': exercise.id === selectedExercise}" (click)="onSelect(exercise.id)">
+            <mat-list-item>
+                <div class="exercise-name">{{ exercise.exerciseName }}</div>
+                <div class="exercise-operations">
+                    <i class="material-icons pointer" (click)="onEdit(exercise.id)">edit</i>
+                    <i class="material-icons pointer" (click)="onDelete(exercise.id)">clear</i>
+                </div>
+            </mat-list-item>
+        </div>
+    </mat-list>
+</mat-card-content>
+<mat-card-actions align='end'>
+    <button mat-flat-button routerLink="add" color="primary">Add exercise</button>
+</mat-card-actions>

@@ -1,0 +1,17 @@
+type SongWithSections {
+    id: ID
+    songName: String
+    artistName: String
+    createdAt: Date
+    songSections: [Section]
+    status: Status!
+}
+
+type UserSongs {
+    songs: [SongWithSections]
+    status: Status!
+}
+
+type Query {
+    allUserSongs: UserSongs!
+}

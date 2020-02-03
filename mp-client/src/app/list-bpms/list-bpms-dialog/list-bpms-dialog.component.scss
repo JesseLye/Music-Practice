@@ -1,0 +1,13 @@
+.no-margin-bottom {
+    margin-bottom: 0;
+}
+
+.button-margin {
+    margin-top: 2rem;
+    & > button {
+        margin-right: 0.5rem;
+        &:nth-last-child {
+            margin-right: 0;
+        }
+    }
+}

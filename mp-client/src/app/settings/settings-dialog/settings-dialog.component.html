@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>{{ headerText }}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="displayForm['update-email']">
+            <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' class="mat-form-field-width-override">
+                <mat-label>New Email</mat-label>
+                <input type="email" placeholder="example@email.com" formControlName="newEmail"
+                    [errorStateMatcher]="matcher" matInput required>
+                <mat-error *ngIf="settingsForm.controls['newEmail'].errors?.email">
+                    Please enter a <strong>valid</strong> email address
+                </mat-error>
+                <mat-error *ngIf="settingsForm.controls['newEmail'].errors?.required">
+                    New Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' class="mat-form-field-width-override">
+                <mat-label>Confirm Email</mat-label>
+                <input type="email" id="email" placeholder="example@email.com" formControlName="confirmEmail"
+                    [errorStateMatcher]="matcher" matInput required>
+                <mat-error *ngIf="settingsForm.controls['confirmEmail'].errors?.confirmEmail">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="settingsForm.controls['confirmEmail'].errors?.required">
+                    Confirm Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="settingsForm.controls['confirmEmail'].errors?.emailMismatch1">
+                    Emails do not <strong>match</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div *ngIf="displayForm['update-password']">
+            <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' class="mat-form-field-width-override">
+                <mat-label>New Password</mat-label>
+                <input type="password" formControlName="newPassword" [errorStateMatcher]="matcher" matInput required>
+                <mat-error *ngIf="settingsForm.controls['newPassword'].errors?.required">
+                    New Password Field is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' class="mat-form-field-width-override">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" formControlName="confirmPassword" [errorStateMatcher]="matcher" matInput
+                    required>
+                <mat-error *ngIf="settingsForm.controls['confirmPassword'].errors?.required">
+                    Confirm Password field is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="settingsForm.controls['confirmPassword'].errors?.passwordMismatch">
+                    Passwords do not <strong>match</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div *ngIf="displayForm['authForm']">
+            <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' class="mat-form-field-width-override">
+                <mat-label>Password</mat-label>
+                <input type="password" formControlName="password" [errorStateMatcher]="matcher" matInput required>
+                <mat-error *ngIf="settingsForm.controls['password'].errors?.required">
+                    Password Field is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex-container horizontal-end button-margin">
+            <button type="button" mat-flat-button (click)="onCancel()">Cancel</button>
+            <mat-spinner-button [options]="buttonOptions" (btnClick)="onSubmit()"></mat-spinner-button>
+            <!-- <button mat-flat-button [disabled]="!settingsForm.valid" color='primary' type="submit">Submit</button> -->
+        </div>
+    </form>
+</div>

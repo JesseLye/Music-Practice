@@ -1,0 +1,55 @@
+<div *ngIf="loading; then loadingBlock; else statsBlock"></div>
+<ng-template #statsBlock>
+    <app-sidenav [menuTitle]="'Practice Statistics'">
+        <div class="title-banner">
+        </div>
+        <div class="container">
+            <div *ngIf="disableButtons">
+                <h1 class="no-data-text">{{ insufficientDataMsg }}</h1>
+            </div>
+            <div class="button-container-margin" [ngClass]="(disableButtons==true) ? 'button-container-outer-center' : 'button-container-outer'">
+                <!-- <h1 class="font-light" style="color: #fff; z-index: 10;">Practice Statistics</h1> -->
+                <div class="button-container-inner">
+                    <button class="button-margin" [disabled]="disableSelect" (click)="onViewBpmData()" type="button" mat-flat-button
+                        color="primary">View BPM Data</button>
+                    <button class="button-margin" [disabled]="disableSelect" (click)="onCustomDate()" type="button" mat-flat-button color="primary"
+                        >Custom Date</button>
+                    <div class="custom-form-field-styles">
+                        <mat-form-field>
+                            <mat-label>Select Section</mat-label>
+                            <mat-select [disabled]="disableSelect" [value]="selectedSectionId" (selectionChange)="onSelect($event.value)">
+                                <mat-option *ngFor="let section of sections" [value]="section.value">
+                                    {{section.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!disableButtons">
+                <mat-card>
+                    <app-line-chart [statsData]="selectedSectionData"></app-line-chart>
+                </mat-card>
+                <mat-grid-list [cols]="breakpoint" rowHeight="50vh" [gutterSize]="gutters"
+                    (window:resize)="onResize($event)">
+                    <mat-grid-tile>
+                        <mat-card class="stats-card-bottom">
+                            <app-bar-chart [statsData]="selectedSectionData"></app-bar-chart>
+                        </mat-card>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-card class="stats-card-bottom">
+                            <app-pie-chart [statsData]="selectedSectionData"></app-pie-chart>
+                        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </div>
+    </app-sidenav>
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template #loadingBlock>
+    <div class="center-spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>{{ titleText }}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="sectionForm" (ngSubmit)="onSubmit()">
+        <!-- <p>Form Changed: {{ sectionForm.dirty }}</p> -->
+        <div *ngIf="createUpdateSection">
+            <div formArrayName="sections" class="well well-lg">
+                <div *ngFor="let section of sections.controls; let i=index" [formGroupName]="i">
+                    <div class="flex-container horizontal-space-between vertical-center" *ngIf="!updateSection">
+                        <h4 style="font-weight: 300;">Section {{i + 1}}</h4>
+                        <i class="material-icons pointer" *ngIf="sections.controls.length > 1"
+                            (click)="removeSection(i)">close</i>
+                    </div>
+                    <mat-form-field hideRequiredMarker floatLabel='auto' color='primary'
+                        class="mat-form-field-width-override">
+                        <input type="text" id="sectionName" placeholder="Section Name" formControlName="sectionName"
+                            matInput>
+                        <mat-error *ngIf="section.controls['sectionName'].errors?.required">
+                            Section Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field hideRequiredMarker floatLabel='auto' color='primary' style="margin-bottom: 0.3rem; padding-top: 1rem;"
+                        class="mat-form-field-width-override">
+                        <input type="number" id="targetBPM" placeholder="Target BPM" formControlName="targetBPM"
+                            matInput>
+                        <mat-error *ngIf="section.controls['targetBPM'].errors?.required">
+                            Target BPM is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="section.controls['targetBPM'].errors?.min">
+                            Target BPM can not be less than <strong>1</strong>
+                        </mat-error>
+                        <mat-error *ngIf="section.controls['targetBPM'].errors?.max">
+                            Target BPM can not be greater than <strong>160</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-divider *ngIf="sections.controls.length > 1 && i !== (sections.controls.length - 1)" class="section-divider-spacing" style="margin-top: 1rem; margin-bottom: 1rem;"></mat-divider>
+                </div>
+            </div>
+        </div>
+        <div class="flex-container horizontal-end button-margin">
+            <button type="button" mat-flat-button (click)="onCancel()">Cancel</button>
+            <button *ngIf="createUpdateSection && !updateSection" (click)="addSection()" mat-flat-button color='primary'
+                type="button">Add
+                Section</button>
+                <mat-spinner-button [options]="buttonOptions" (btnClick)="onSubmit()"></mat-spinner-button>
+            <!-- <button [disabled]="!sectionForm.valid" mat-flat-button color='primary' type="submit">Submit</button> -->
+        </div>
+    </form>
+</div>
+
+<!-- <p>sectionForm value: {{ sectionForm.value | json}}</p> -->

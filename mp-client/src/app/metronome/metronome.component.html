@@ -1,0 +1,40 @@
+<app-sidenav [menuTitle]="'Metronome'">
+    <div class="title-banner">
+    </div>
+    <div class="container">
+        <mat-grid-list class="metronome-height" cols="1" rowHeight="fit">
+            <mat-grid-tile>
+                <mat-card class="metronome-container">
+                    <div class="flex-container horizontal-end">
+                        <button *ngIf="!freePractice" (click)="onToggleWarmUpMode()" mat-flat-button
+                            color="accent">Warmup Mode:
+                            {{ warmUpMode ? "On" : "Off" }}</button>
+                    </div>
+                    <div class="play-button-container" (click)="onClick()">
+                        <i class="material-icons pointer play-button-colour">{{ playText }}</i>
+                    </div>
+                    <div class="flex-container horizontal-center">
+                        <div class="bpm-container">
+                            <mat-label>BPM: {{tempo}}</mat-label>
+                            <div>
+                                <mat-slider class="custom-slider-styles" (input)="onInputChange($event.value)"
+                                    tickInterval="1" min="30" max="160" value="100">
+                                </mat-slider>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-container horizontal-center">
+                        <mat-form-field>
+                            <mat-label>Resolution</mat-label>
+                            <mat-select [value]="resolutions[0].value" (selectionChange)="onSelect($event.value)">
+                                <mat-option *ngFor="let resolution of resolutions" [value]="resolution.value">
+                                    {{resolution.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</app-sidenav>

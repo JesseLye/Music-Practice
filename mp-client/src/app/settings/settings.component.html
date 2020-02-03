@@ -1,0 +1,46 @@
+<div *ngIf="loading; then loadingBlock; else settingsBlock"></div>
+<ng-template #settingsBlock>
+    <app-sidenav [menuTitle]="'Settings'">
+        <div class="title-banner">
+        </div>
+        <div class="container">
+            <mat-grid-list class="settings-card-height" cols="1" rowHeight='fit'>
+                <mat-grid-tile>
+                    <mat-card class="settings-card-min-width">
+                        <mat-card-title style="font-weight: 300;">
+                            Settings
+                        </mat-card-title>
+                        <mat-card-content class="settings-component settings-margin-top">
+                            <div class="settings-input-flex settings-input-email-margin-bottom">
+                                <mat-form-field class="settings-input-flex-basis">
+                                    <input matInput [disabled]="true" placeholder="Email" [value]="userDetails.email">
+                                </mat-form-field>
+                                <button mat-flat-button color="primary" [routerLink]="'update-email'">Update</button>
+                            </div>
+                            <div class="settings-input-flex settings-input-margin-bottom ">
+                                <mat-form-field class="settings-input-flex-basis">
+                                    <input matInput type="password" [disabled]="true" placeholder="Password"
+                                        value="YourPasswordIsNotActuallyHere">
+                                </mat-form-field>
+                                <button mat-flat-button color="primary" [routerLink]="'update-password'">Update</button>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="settings-input-flex settings-margin-top">
+                                <div class="settings-input-flex">
+                                    <p>Delete Account</p>
+                                </div>
+                                <button mat-flat-button color="warn" [routerLink]="'delete-account'">Delete</button>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+    </app-sidenav>
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template #loadingBlock>
+    <div class="center-spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>
