@@ -97,10 +97,7 @@ export class PracticeStatisticsComponent implements OnInit {
     this.practiceStatsService.dateRange.subscribe(date => {
       // Don't run if the init date was set
       if (!this.setDateInit) {
-        var firstDate = new Date(date.startDate).getTime();
-        var lastDate = new Date(date.endDate).getTime();
-        var differenceInTime = lastDate - firstDate;
-        var differenceInDays = differenceInTime / (1000 * 3600 * 24);
+        var differenceInDays = this.differenceInDates(date.startDate, date.endDate);
         if (differenceInDays >= this.dateLimit) {
           this.disableButtons = false;
           this.selectedDateRange = date;
@@ -158,9 +155,12 @@ export class PracticeStatisticsComponent implements OnInit {
 
     this.disableButtons = false;
     this.disableSelect = false;
-    this.onSelect(firstSection);
+    var initSelectSuccess = this.onSelect(firstSection);
     this.setDateInit = false;
     this.loading = loading;
+
+    // prevents bug where dashboard would use previous dates of last viewed song/exercise
+    if (!initSelectSuccess) this.practiceStatsService.clearDates();
   }
 
   onCustomDate() {
@@ -177,11 +177,9 @@ export class PracticeStatisticsComponent implements OnInit {
     if (!findData.sectionBpms.length) {
       this.disableButtons = true;
       this.insufficientDataMsg = "No Data To Be Displayed"
+      return false;
     } else {
-      var firstDate = new Date(findData.sectionBpms[0].createdAt).getTime();
-      var lastDate = new Date(findData.sectionBpms[findData.sectionBpms.length - 1].createdAt).getTime();
-      var differenceInTime = lastDate - firstDate;
-      var differenceInDays = differenceInTime / (1000 * 3600 * 24);
+      var differenceInDays = this.differenceInDates(findData.sectionBpms[0].createdAt, findData.sectionBpms[findData.sectionBpms.length - 1].createdAt);
       if (differenceInDays >= this.dateLimit) {
         this.disableButtons = false;
         this.originalBpms = [...findData.sectionBpms];
@@ -189,12 +187,15 @@ export class PracticeStatisticsComponent implements OnInit {
         if (!filterDates.length) {
           this.disableButtons = true;
           this.insufficientDataMsg = "Visualisation Requires Minimum 3 Days of Practice Data";
+          return false;
         }
         findData.sectionBpms = [...filterDates];
         this.selectedSectionData = findData;
+        return true;
       } else {
         this.disableButtons = true;
         this.insufficientDataMsg = "Visualisation Requires Minimum 3 Days of Practice Data";
+        return false;
       }
     }
   }
@@ -211,6 +212,13 @@ export class PracticeStatisticsComponent implements OnInit {
       }
     });
     return filteredData;
+  }
+
+  differenceInDates(firstDate, lastDate) {
+    var first = new Date(firstDate).getTime();
+    var last = new Date(lastDate).getTime();
+    var differenceInTime = last - first;
+    return differenceInTime / (1000 * 3600 * 24);
   }
 
   checkDataIntegrity(section) {

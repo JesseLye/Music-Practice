@@ -9,4 +9,11 @@ export class PracticeStatisticDialogService {
     setDates(startDate, endDate) {
         this.dateRange.next({startDate, endDate});
     }
+
+    clearDates() {
+        this.dateRange.next({
+            startDate: null,
+            endDate: null,
+        });
+    }
 }

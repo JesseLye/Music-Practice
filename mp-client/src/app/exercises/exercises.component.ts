@@ -8,7 +8,7 @@ import { Subscription } from "rxjs";
   templateUrl: './exercises.component.html',
   styleUrls: ['./exercises.component.scss']
 })
-export class ExercisesComponent implements OnInit {
+export class ExercisesComponent implements OnInit, OnDestroy {
   exercises: Exercise[];
   loading: boolean = true;
   exerciseServiceSubscription: Subscription;
