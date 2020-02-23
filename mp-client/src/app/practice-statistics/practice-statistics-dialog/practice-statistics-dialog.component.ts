@@ -15,7 +15,7 @@ export class DialogEntryComponent {
     }
     openDialog() {
         let dialogRef = this.dialog.open(PracticeStatisticsDialog, {
-            minWidth: "25vw",
+            minWidth: "33vw",
         });
         dialogRef.afterClosed().subscribe(result => {
             this.router.navigate(['../'], { relativeTo: this.route });

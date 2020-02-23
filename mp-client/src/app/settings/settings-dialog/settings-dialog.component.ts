@@ -58,7 +58,7 @@ export class DialogEntryComponent {
                 url,
                 isAuthed: false,
             },
-            minWidth: "25vw",
+            minWidth: "33vw",
         });
         authRef.afterClosed()
             .pipe(
@@ -69,7 +69,7 @@ export class DialogEntryComponent {
                                 url,
                                 isAuthed: true,
                             },
-                            minWidth: "25vw",
+                            minWidth: "33vw",
                         });
                         this.configureSnackBarMessage(data);
                         return dialogRef.afterClosed();

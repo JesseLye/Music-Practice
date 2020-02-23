@@ -102,6 +102,7 @@ export class MetronomeComponent implements OnInit, OnDestroy {
                 practiceId: this.practiceId,
                 isSong: this.isSong,
             },
+            minWidth: "33vw",
         });
 
         dialogRef.afterClosed().subscribe(result => {

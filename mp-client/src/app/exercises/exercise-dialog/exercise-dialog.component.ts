@@ -71,7 +71,7 @@ export class DialogEntryComponent {
           route,
           id: hasId ? id : false,
         },
-        minWidth: "25vw",
+        minWidth: "33vw",
       });
     } else {
       dialogRef = this.dialog.open(ExerciseDialog, {
@@ -79,7 +79,7 @@ export class DialogEntryComponent {
           route,
           id: hasId ? id : false,
         },
-        minWidth: "25vw",
+        minWidth: "33vw",
       });
     }
     dialogRef.afterClosed().subscribe(result => {
