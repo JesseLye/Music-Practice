@@ -353,6 +353,7 @@ export class MetronomeEntryDialogComponent {
         private exerciseService: ExerciseService) { }
 
     onSubmit() {
+        this.buttonOptions.active = true;
         if (this.data.isSong) {
             this.songService.addBpm(this.data.sectionId, this.data.bpm).subscribe(({ data }) => {
                 if (data.addBpm.status.ok) {
@@ -389,7 +390,6 @@ export class MetronomeEntryDialogComponent {
     }
 
     toggleDialogRef(isSuccess, data) {
-        this.buttonOptions.active = true;
         if (isSuccess) {
             this.dialogRef.close({
                 success: true,
