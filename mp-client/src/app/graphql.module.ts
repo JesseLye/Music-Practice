@@ -4,6 +4,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
+import { setContext } from 'apollo-link-context';
 
 // const uri = 'https://immense-caverns-15639.herokuapp.com/graphql'; // <-- add the URL of the GraphQL server here
 const uri = 'http://localhost:8080/graphql';
@@ -21,14 +22,30 @@ export function createApollo(httpLink: HttpLink) {
     }
   });
 
-  const link = httpLink.create({
-    uri,
-    withCredentials: true,
+  const basic = setContext((operation, context) => ({
+    headers: {
+      Accept: 'charset=utf-8'
+    }
+  }));
+
+  const auth = setContext((operation, context) => {
+    const token = localStorage.getItem('jwtToken');
+    if (token === null) {
+      return {};
+    } else {
+      return {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+    }
   });
 
   const httpLinkWithErrorHandling = ApolloLink.from([
+    basic,
+    auth,
     errorLink,
-    link,
+    httpLink.create({ uri })
   ]);
 
   return {

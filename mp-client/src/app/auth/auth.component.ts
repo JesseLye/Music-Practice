@@ -107,7 +107,8 @@ export class AuthComponent implements OnInit {
           if (!data.addUser.status.ok) {
             this.authService.authErr.next(data.addUser.status.errMessage);
           } else {
-            // this.loggedIn.next(true);
+            localStorage.setItem("jwtToken", data.addUser.token);
+            this.authService.resetStore();
             this.authService.userDetails.next({
               id: data.addUser.id,
               email: data.addUser.email,
@@ -129,6 +130,8 @@ export class AuthComponent implements OnInit {
           this.authService.authErr.next(data.authUser.status.errMessage);
         } else {
           // this.loggedIn.next(true);
+          localStorage.setItem("jwtToken", data.authUser.token);
+          this.authService.resetStore();
           this.authService.userDetails.next({
             id: data.authUser.id,
             email: data.authUser.email,

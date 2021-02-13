@@ -4,6 +4,7 @@ export interface AuthResponse {
     authUser: {
       id: String;
       email: String;
+      token: string;
       status: Status,
     }
   };
@@ -12,6 +13,7 @@ export interface AuthResponse {
     addUser: {
       id: String;
       email: String;
+      token: string;
       status: Status;
     }
   };

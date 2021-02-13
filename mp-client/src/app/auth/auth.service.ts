@@ -48,7 +48,7 @@ export class AuthService {
       variables: {
         email,
         password,
-        setNewSession: true,
+        setNewToken: true,
       },
       refetchQueries: [{
         query: isAuth,
@@ -74,7 +74,7 @@ export class AuthService {
       variables: {
         email,
         password,
-        setNewSession: false,
+        setNewToken: false,
       },
     });
   }
@@ -84,6 +84,7 @@ export class AuthService {
     this.exerciseService.performCleanUp();
     this.apollo.getClient().resetStore();
     this.userDetails.next(false);
+    localStorage.removeItem("jwtToken");
   }
 
   initResetPassword(email) {
@@ -160,5 +161,9 @@ export class AuthService {
     return this.apollo.watchQuery<IsAuthed>({
       query: isAuth
     });
+  }
+
+  resetStore() {
+    this.apollo.getClient().resetStore();
   }
 }

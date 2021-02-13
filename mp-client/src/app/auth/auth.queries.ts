@@ -1,10 +1,11 @@
 import gql from 'graphql-tag';
 
 export const authUser = gql`
-    mutation authUser($email: String!, $password: String!, $setNewSession: Boolean!) {
-      authUser(email: $email, password: $password, setNewSession: $setNewSession) {
+    mutation authUser($email: String!, $password: String!, $setNewToken: Boolean!) {
+      authUser(email: $email, password: $password, setNewToken: $setNewToken) {
         id
         email
+        token
         status {
           ok
           errMessage
@@ -68,6 +69,7 @@ export const addUser = gql`
       addUser(email: $email, password: $password, password2: $password2) {
         id
         email
+        token
         status {
           ok
           errMessage
