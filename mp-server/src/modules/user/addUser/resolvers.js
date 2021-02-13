@@ -16,7 +16,8 @@ exports.resolvers = {
                 const token  = jwt.sign({
                     id: newUser.id,
                   },
-                  process.env.SECRET_KEY
+                  process.env.SECRET_KEY,
+                  { expiresIn: "3d" }
                 );
                 return {
                     id: newUser.id,
