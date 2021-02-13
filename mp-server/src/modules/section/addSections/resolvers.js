@@ -8,7 +8,7 @@ const {
 
 exports.resolvers = {
     Mutation: {
-        addSections: async (_, args, { req, models }) => {
+        addSections: async (_, args, { req, models, userId }) => {
             try {
                 if (args.SongId && args.ExerciseId) {
                     throw "A Section can only be associated with either a Song or Exercise; not both."
@@ -17,7 +17,7 @@ exports.resolvers = {
                     throw "Either a SongId or ExerciseId is required to add a Section";
                 }
                 let selectID = args.SongId ? "SongId" : "ExerciseId";
-                const errors = await findSectionCheck(req, args[selectID], !!args.SongId);
+                const errors = await findSectionCheck(req, args[selectID], !!args.SongId, userId);
                 if (errors) {
                     throw errors;
                 } else {

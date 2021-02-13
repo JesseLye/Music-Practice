@@ -4,9 +4,9 @@ const {
 
 exports.resolvers = {
     Mutation: {
-        removeSection: async (_, args, { req, models }) => {
+        removeSection: async (_, args, { req, models, userId }) => {
             try {
-                const errors = await checkSectionOwnership(req, args.id, args.isSong);
+                const errors = await checkSectionOwnership(req, args.id, args.isSong, userId);
                 if (errors) {
                     throw errors;
                 } else {

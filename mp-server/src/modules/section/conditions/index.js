@@ -3,7 +3,7 @@ const { checkExerciseOwnership } = require("../../exercise/conditions");
 
 const models = require("../../../../models");
 
-const findSectionCheck = async function (req, id, isSong) {
+const findSectionCheck = async function (req, id, isSong, userId) {
     if (!id) return "Either a SongId or ExerciseId is required";
     if (isSong) {
         const findSong = await models.Song.findOne({ where: { id, UserId: userId } });
@@ -15,19 +15,19 @@ const findSectionCheck = async function (req, id, isSong) {
     return false;
 }
 
-const checkSectionOwnership = async function (req, sectionId, isSong) {
+const checkSectionOwnership = async function (req, sectionId, isSong, userId) {
     const findSection = await models.Section.findOne({ where: { id: sectionId } });
     if (!findSection) {
         let whichSection = isSong ? "Song" : "Exercise";
         return `${whichSection} does not have section with ID: ${sectionId}`;
     }
     if (isSong) {
-        const songOwnershipError = await checkSongOwnership(req, findSection.SongId);
+        const songOwnershipError = await checkSongOwnership(req, findSection.SongId, userId);
         if (songOwnershipError) {
             return songOwnershipError;
         }
     } else {
-        const exerciseOwnershipError = await checkExerciseOwnership(req, findSection.ExerciseId);
+        const exerciseOwnershipError = await checkExerciseOwnership(req, findSection.ExerciseId, userId);
         if (exerciseOwnershipError) {
             return exerciseOwnershipError;
         }

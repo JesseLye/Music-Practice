@@ -2,7 +2,7 @@ exports.resolvers = {
     Query: {
         fullExerciseDetails: async (_, args, { req, models, userId }) => {
             try {
-                const foundExercise = await models.Exercise.findOne({ where: { id: args.id, userId } });
+                const foundExercise = await models.Exercise.findOne({ where: { id: args.id, UserId: userId } });
                 if (!foundExercise) throw "Exercise not found";
                 const foundSections = await models.Section.findAll({ where: { ExerciseId: foundExercise.id }, order: [["createdAt", "ASC"]] });
 

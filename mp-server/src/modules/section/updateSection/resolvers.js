@@ -4,13 +4,13 @@ const {
 
 exports.resolvers = {
     Mutation: {
-        updateSection: async (_, args, { req, models }) => {
+        updateSection: async (_, args, { req, models, userId }) => {
             try {
                 const argsLength = Object.keys(args).length;
                 if (argsLength === 2) {
                     throw "Another argument besides id is required";
                 }
-                const error = await checkSectionOwnership(req, args.id, args.isSong);
+                const error = await checkSectionOwnership(req, args.id, !!args.isSong, userId);
                 if (error) {
                     throw error;
                 } else {

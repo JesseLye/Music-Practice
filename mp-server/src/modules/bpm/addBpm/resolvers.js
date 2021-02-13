@@ -2,9 +2,9 @@ const { checkSectionOwnership } = require("../../section/conditions");
 
 exports.resolvers = {
     Mutation: {
-        addBpm: async (_, args, { req, models }) => {
+        addBpm: async (_, args, { req, models, userId }) => {
             try {
-                const validationErrors = await checkSectionOwnership(req, args.id, args.isSong);
+                const validationErrors = await checkSectionOwnership(req, args.id, !!args.isSong, userId);
                 if (validationErrors) {
                     throw validationErrors;
                 } else {
