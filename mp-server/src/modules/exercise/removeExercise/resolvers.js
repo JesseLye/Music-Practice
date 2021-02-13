@@ -4,9 +4,9 @@ const {
 
 exports.resolvers = {
     Mutation: {
-        removeExercise: async (_, args, { req, models }) => {
+        removeExercise: async (_, args, { req, models, userId }) => {
             try {
-                const exerciseOwnership = await checkExerciseOwnership(req, args.id);
+                const exerciseOwnership = await checkExerciseOwnership(req, args.id, userId);
                 if (exerciseOwnership) {
                     throw exerciseOwnership;
                 } else {

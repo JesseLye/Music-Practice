@@ -10,9 +10,9 @@ const {
 
 exports.resolvers = {
     Mutation: {
-        updateUser: async (_, args, { req, models, redisClient }) => {
+        updateUser: async (_, args, { req, models, redisClient, userId }) => {
             try {
-                const redisKey = `userVerification/${req.session.userId}`;
+                const redisKey = `userVerification/${userId}`;
                 const isVerified = await getRedisKey(redisClient, redisKey);
                 if (!isVerified) throw "User is not verified!";
 
@@ -24,9 +24,9 @@ exports.resolvers = {
                     if (args.updateEmail !== args.confirmUpdateEmail) throw "Email does not match";
                     let emailExists = await checkValidUser(args.updateEmail);
                     if (emailExists) throw emailExists;
-                    await models.User.update({ email: args.updateEmail }, { where: { id: req.session.userId } });
+                    await models.User.update({ email: args.updateEmail }, { where: { id: userId } });
                     updatedEmail = {
-                        id: req.session.userId,
+                        id: userId,
                         email: args.updateEmail
                     };
                 }
@@ -36,7 +36,7 @@ exports.resolvers = {
                         if (invalidPassword) throw invalidPassword;
                         const salt = await bcrypt.genSalt(10);
                         const hash = await bcrypt.hash(args.updatePassword, salt);
-                        await models.User.update({ password: hash }, { where: { id: req.session.userId } });
+                        await models.User.update({ password: hash }, { where: { id: userId } });
                         didUpdatePassword = true;
                     } else {
                         throw "Passwords Do Not Match";

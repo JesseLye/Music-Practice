@@ -5,9 +5,9 @@ const {
 
 exports.resolvers = {
     Mutation: {
-        removeSong: async (_, args, { req, models }) => {
+        removeSong: async (_, args, { req, models, userId }) => {
             try {
-                const songOwnership = await checkSongOwnership(req, args.id);
+                const songOwnership = await checkSongOwnership(req, args.id, userId);
                 if (songOwnership) {
                     throw songOwnership;
                 } else {

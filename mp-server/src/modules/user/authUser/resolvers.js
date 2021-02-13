@@ -4,7 +4,7 @@ const {
 const {
     setRedisKey
 } = require("../../../../utils/redisPromisified");
-
+const jwt = require("jsonwebtoken");
 
 exports.resolvers = {
     Mutation: {
@@ -15,12 +15,23 @@ exports.resolvers = {
                     throw "Email Address Not Found";
                 }
                 const invalidPassword = await comparePassword(findUser.password, args.password);
-                    if (!invalidPassword) {
-                        if (args.setNewSession) {
-                            req.session.userId = findUser.id;
-                        } else {
-                            await setRedisKey(redisClient, "userVerification", findUser.id, findUser.id);
-                        }
+                if (!invalidPassword) {
+                    if (args.setNewToken) {
+                        const token = jwt.sign({
+                            id: newUser.id,
+                        },
+                            process.env.SECRET_KEY
+                        );
+                        return {
+                            id: findUser.id,
+                            email: findUser.email,
+                            token,
+                            status: {
+                                ok: true,
+                            }
+                        };
+                    } else {
+                        await setRedisKey(redisClient, "userVerification", findUser.id, findUser.id);
                         return {
                             id: findUser.id,
                             email: findUser.email,
@@ -28,9 +39,10 @@ exports.resolvers = {
                                 ok: true,
                             }
                         };
-                    } else {
-                        throw invalidPassword;
                     }
+                } else {
+                    throw invalidPassword;
+                }
             } catch (errMessage) {
                 return {
                     status: {

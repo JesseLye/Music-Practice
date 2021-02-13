@@ -5,12 +5,12 @@ const {
 
 exports.resolvers = {
     Mutation: {
-        updateSong: async (_, args, { req, models }) => {
+        updateSong: async (_, args, { req, models, userId }) => {
             try {
                 if (!args.songName && !args.artistName) {
                     throw "No arguments recieved for valid update";
                 }
-                const songOwnershipErrors = await checkSongOwnership(req, args.id);
+                const songOwnershipErrors = await checkSongOwnership(req, args.id, userId);
                 if (songOwnershipErrors) {
                     throw songOwnership;
                 } else {

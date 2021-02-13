@@ -25,7 +25,6 @@ exports.resolvers = {
                 await models.User.update({ password: hash }, { where: { id: userID } });
 
                 await deleteRedisKey(redisClient, redisKey);
-
                 return {
                     ok: true,
                 }

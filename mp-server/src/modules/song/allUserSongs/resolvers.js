@@ -1,8 +1,8 @@
 exports.resolvers = {
     Query: {
-        allUserSongs: async (_, __, { req, models }) => {
+        allUserSongs: async (_, __, { req, models, userId }) => {
             try {
-                const foundSongs = await models.Song.findAll({ where: { UserId: req.session.userId }, order: [["createdAt", "ASC"]] });
+                const foundSongs = await models.Song.findAll({ where: { UserId: userId }, order: [["createdAt", "ASC"]] });
                 if (foundSongs.length === 0) throw "User does not have any songs.";
                 var buildSongs = foundSongs.map(async (d) => {
                     const foundSections = await models.Section.findAll({ where: { SongId: d.id }, order: [["createdAt", "ASC"]] });

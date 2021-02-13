@@ -2,18 +2,7 @@ exports.resolvers = {
     Mutation: {
         logoutUser: async (_, __, { req }) => {
             try {
-                const deleteSession = () => {
-                    return new Promise((resolve, reject) => {
-                        return req.session.destroy((err) => {
-                            if (err) {
-                                reject(err);
-                            } else {
-                                resolve();
-                            }
-                        })
-                    })
-                }
-                await deleteSession();
+                // Client will clear out the JWT
                 return {
                     ok: true,
                 };

@@ -1,8 +1,8 @@
 exports.resolvers = {
     Mutation: {
-        removeUser: async (_, __, { req, models }) => {
+        removeUser: async (_, __, { req, models, userId }) => {
             try {
-                const foundUser = await models.User.findOne({ where: { id: req.session.userId } });
+                const foundUser = await models.User.findOne({ where: { id: userId } });
                 const getAllSongs = await models.Song.findAll({ where: { UserId: foundUser.id } });
                 const getAllExercises = await models.Exercise.findAll({ where: { UserId: foundUser.id } });
 
@@ -20,19 +20,7 @@ exports.resolvers = {
                     await models.Exercise.destroy({ where: { id: getAllExercises[i].id } });
                 }
 
-                await models.User.destroy({ where: { id: req.session.userId } });
-                const deleteSession = () => {
-                    return new Promise((resolve, reject) => {
-                        return req.session.destroy((err) => {
-                            if (err) {
-                                reject(err);
-                            } else {
-                                resolve();
-                            }
-                        })
-                    })
-                }
-                await deleteSession();
+                await models.User.destroy({ where: { id: userId } });
                 return {
                     ok: true
                 }

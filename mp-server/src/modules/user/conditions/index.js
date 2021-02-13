@@ -1,5 +1,6 @@
 const models = require("../../../../models");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;

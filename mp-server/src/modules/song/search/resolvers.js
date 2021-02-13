@@ -1,8 +1,8 @@
 exports.resolvers = {
     Query: {
-        fullSongDetails: async (_, args, { req, models }) => {
+        fullSongDetails: async (_, args, { req, models, userId }) => {
             try {
-                const foundSong = await models.Song.findOne({ where: { id: args.id, UserId: req.session.userId } });
+                const foundSong = await models.Song.findOne({ where: { id: args.id, UserId: userId } });
                 if (!foundSong) throw "Song not found";
                 const foundSections = await models.Section.findAll({ where: { SongId: foundSong.id }, order: [["createdAt", "ASC"]] });
 

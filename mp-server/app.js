@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const graphqlHTTP = require('express-graphql');
-const session = require("express-session");
 const cors = require("cors");
 const redis = require("redis");
 const RateLimit = require("express-rate-limit");
@@ -32,29 +31,12 @@ app.use(cors({
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-let RedisStore = require('connect-redis')(session);
 let redisClient = null;
 if (process.env.REDIS_URL) {
     redisClient = redis.createClient(process.env.REDIS_URL);
 } else {
     redisClient = redis.createClient();
 }
-
-app.use(
-    session({
-        name: "qid",
-        secret: "someThing",
-        resave: false,
-        saveUninitialized: false,
-        store: new RedisStore({ client: redisClient }),
-        cookie: {
-            httpOnly: true,
-            // secure: process.env.NODE_ENV === "production",
-            secure: false,
-            maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
-        }
-    })
-);
 
 const schema = genSchema();
 applyMiddleware(schema, middleware);
@@ -64,9 +46,10 @@ app.use('/graphql', graphqlHTTP((req) => ({
     context: {
         req,
         models,
-        redisClient
+        redisClient,
+        userId: null,
     },
-    // graphiql: true
+    graphiql: true
 })));
 
 const limiter = new RateLimit({

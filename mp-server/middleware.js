@@ -1,3 +1,5 @@
+const { decodeUserIdFromJwtAuthorizationHeader } = require('./src/authentication');
+
 const isAuthenticated = async (
   resolve,
   parent,
@@ -5,29 +7,13 @@ const isAuthenticated = async (
   context,
   info
 ) => {
-  if (!context.req.session.userId) {
-    throw new Error("not authenticated from graphql middleware");
-  }
-
-  const foundUser = await context.models.User.findOne({ where: { id: context.req.session.userId } });
-
+  const userId = decodeUserIdFromJwtAuthorizationHeader(context.req.headers);
+  const foundUser = await context.models.User.findOne({ where: { id: userId } });
   if (!foundUser) {
-    let error = "User Does Not Exist Within The Database";
-    const deleteSession = () => {
-      return new Promise((resolve, reject) => {
-        return context.req.session.destroy((err) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve();
-          }
-        })
-      })
-    }
-    await deleteSession();
     throw new Error(error);
   }
-
+  // set JWT to be available throughout each request that requires "isAuthenticated"
+  context.userId = userId;
   return resolve(parent, args, context, info);
 };
 

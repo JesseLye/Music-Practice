@@ -1,8 +1,8 @@
 exports.resolvers = {
     Mutation: {
-        addSong: async (_, args, { req, models }) => {
+        addSong: async (_, args, { req, models, userId }) => {
             try {
-                const newSong = await models.Song.create({ songName: args.songName, artistName: args.artistName, UserId: req.session.userId });
+                const newSong = await models.Song.create({ songName: args.songName, artistName: args.artistName, UserId: userId });
                 return {
                     id: newSong.id,
                     songName: newSong.songName,
