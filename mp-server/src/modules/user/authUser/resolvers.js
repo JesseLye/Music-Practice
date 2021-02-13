@@ -10,31 +10,31 @@ exports.resolvers = {
     Mutation: {
         authUser: async (_, args, { req, models, redisClient }) => {
             try {
-                const findUser = await models.User.findOne({ where: { email: args.email } });
-                if (!findUser) {
+                const foundUser = await models.User.findOne({ where: { email: args.email } });
+                if (!foundUser) {
                     throw "Email Address Not Found";
                 }
-                const invalidPassword = await comparePassword(findUser.password, args.password);
+                const invalidPassword = await comparePassword(foundUser.password, args.password);
                 if (!invalidPassword) {
                     if (args.setNewToken) {
                         const token = jwt.sign({
-                            id: newUser.id,
+                            id: foundUser.id,
                         },
                             process.env.SECRET_KEY
                         );
                         return {
-                            id: findUser.id,
-                            email: findUser.email,
+                            id: foundUser.id,
+                            email: foundUser.email,
                             token,
                             status: {
                                 ok: true,
                             }
                         };
                     } else {
-                        await setRedisKey(redisClient, "userVerification", findUser.id, findUser.id);
+                        await setRedisKey(redisClient, "userVerification", foundUser.id, foundUser.id);
                         return {
-                            id: findUser.id,
-                            email: findUser.email,
+                            id: foundUser.id,
+                            email: foundUser.email,
                             status: {
                                 ok: true,
                             }

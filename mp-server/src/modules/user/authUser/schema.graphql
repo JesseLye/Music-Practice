@@ -2,8 +2,9 @@ type BasicUserDetails {
   id: ID
   email: String
   status: Status!
+  token: String
 }
 
 type Mutation {
-    authUser(email: String!, password: String!, setNewSession: Boolean!): BasicUserDetails!
+    authUser(email: String!, password: String!, setNewToken: Boolean!): BasicUserDetails!
 }
